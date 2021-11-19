@@ -132,20 +132,6 @@ def timestamp_datetime(value):
     # 最后再经过strftime函数转换为正常日期格式。
     dt = time.strftime(format, value)
     return dt
-def get_oid_type(bili_id, bili_type):
-    """ 获取url里的type值 """
-    if bili_type == 0:  # 视频
-        b_oid, b_type = (BV_AV(bili_id), 1)
-    elif bili_type == 1:  # 动态
-        api_url = 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=&;#39;
-        r1 = requests.get(api_url + str(bili_id), headers=head).json()
-        dynamic_type = r1['data']['card']['desc']['type']
-        b_oid = r1['data']['card']['desc']['rid'] if int(dynamic_type) == 2 else bili_id
-        b_type = 11 if int(dynamic_type) == 2 else 17
-    else:  # 专栏
-        b_oid, b_type = (bili_id, 12)
-    return b_oid, b_type  # oid, type 作者：修理光粉 https://www.bilibili.com/read/cv13942139 出处：bilibili
-
 
 def pull(pn,file_dir,target_list):
 
