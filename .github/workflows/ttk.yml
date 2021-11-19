@@ -38,6 +38,6 @@ jobs:
             git commit -m "上传于 $datime" -a
         fi
     - name: Push changes
-      uses: ad-m/github-push-action@second
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
