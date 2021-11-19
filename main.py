@@ -50,7 +50,8 @@ headers = {
       'User-Agent':
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
   }
-def BV_AV(bv_id):  
+def BV_AV(bv_id): 
+    bv_id=bv_id.replace('/','')
     """ BV号还原AV号 """
     table = 'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF'
     tr = {}
@@ -63,6 +64,7 @@ def BV_AV(bv_id):
     for i in range(6):
         r += tr[bv_id[s[i]]] * 58 ** i
     return (r - add) ^ xor
+
 def add_url(b_oid, b_type):
     """ 拼接url or https://api.bilibili.com/x/v2/reply?&type={}&oid={}&pn={} """
     return_url = f"https://api.bilibili.com/x/v2/reply/main?&type={b_type}&oid={b_oid}&next="
@@ -130,6 +132,21 @@ def timestamp_datetime(value):
     # 最后再经过strftime函数转换为正常日期格式。
     dt = time.strftime(format, value)
     return dt
+def get_oid_type(bili_id, bili_type):
+    """ 获取url里的type值 """
+    if bili_type == 0:  # 视频
+        b_oid, b_type = (BV_AV(bili_id), 1)
+    elif bili_type == 1:  # 动态
+        api_url = 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=&;#39;
+        r1 = requests.get(api_url + str(bili_id), headers=head).json()
+        dynamic_type = r1['data']['card']['desc']['type']
+        b_oid = r1['data']['card']['desc']['rid'] if int(dynamic_type) == 2 else bili_id
+        b_type = 11 if int(dynamic_type) == 2 else 17
+    else:  # 专栏
+        b_oid, b_type = (bili_id, 12)
+    return b_oid, b_type  # oid, type 作者：修理光粉 https://www.bilibili.com/read/cv13942139 出处：bilibili
+
+
 def pull(pn,file_dir,target_list):
 
   for i in target_list: 
@@ -137,13 +154,14 @@ def pull(pn,file_dir,target_list):
         b_oid, b_type = get_oid_type(bili_id, bili_type)
         print('new task--'+b_oid)
         oid = b_oid
-        gettype = b_type
+        gettype = b_type    
         if gettype == 11:
             get_url='https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=%s' % oid
             response = requests.get(get_url, headers=headers)
             oid = response.json()['data']['card']['desc']['rid']
         comment_url = 'https://api.bilibili.com/x/v2/reply?jsonp=jsonp&pn=1&type=%s&oid=%s&sort=1' % (gettype,oid)
         response = requests.get(comment_url, headers=headers)
+        print(response.json())
         count = response.json()['data']['page']['count']  # 评论总数
         page_count = math.ceil(int(count) / 20)  # 评论总页数
         print('计算评论总页数为'+str(page_count)+'页，大约需要'+str(page_count*7)+'s....')
@@ -345,10 +363,10 @@ def second(file_dir):
 
 
 if __name__ == "__main__":
-    # 目标链接配置
+    # 目标链接配置(最好不要带任何后缀防止出错..)
     target_list = [] 
-    target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu/')
-    # target_list.append('https://www.bilibili.com/read/cv14018730') 
+    target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu/') 
+    #target_list.append('https://www.bilibili.com/read/cv14018730') 
     # 其实好像对哔哩哔哩的所有视频都适用吧...
     targetnow = False # 定义即时分析，自动切换目录
     githubvesion=1154 # 此参数定义一天之中的提交版本，防止重复分析
