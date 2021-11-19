@@ -363,7 +363,7 @@ if __name__ == "__main__":
     timedate=str(date01.year)+'-'+str(date01.month)+'-'+str(date01.day)+playnow
 
     # 目录设置区域（注意配置）
-    file_dir = './content/drive/My Drive/'+timedate+'/'
+    file_dir = './'+timedate+'/'
     # pn value there
     # filedir = './'+timedate+'/' # all use file_dir
     pnt = './pn.txt' # write pn to this path~
