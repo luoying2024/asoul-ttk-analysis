@@ -29,7 +29,7 @@ jobs:
         TZ: 'CST-8'
       run: |
         sudo timedatectl set-timezone Asia/Shanghai
-        git config --global user.email ${{ secrets.GITHUB_email }}
+        git config --global user.email ${{ secrets.GITHUB_EMAIL }}
         git config --global user.name luoying2024
         datime=$(date "+%Y年%m月%d日 %H:%M")
         echo "git commit: 上传于 $datime"
