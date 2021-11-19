@@ -23,14 +23,14 @@ jobs:
         pip install setuptools wheel twine bs4 requests tabulate pandas
     - name: Run
       run: |
-        python analyze.py
+        python main.py
     - name: commit
       env:
         TZ: 'CST-8'
       run: |
         sudo timedatectl set-timezone Asia/Shanghai
-        git config --global user.email trembleafterme@outlook.com
-        git config --global user.name TomoeMami
+        git config --global user.email ${{ secrets.GITHUB_email }}
+        git config --global user.name luoying2024
         datime=$(date "+%Y年%m月%d日 %H:%M")
         echo "git commit: 上传于 $datime"
         if [ -n "$(git status -s)" ];then
@@ -38,6 +38,6 @@ jobs:
             git commit -m "上传于 $datime" -a
         fi
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@second
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
