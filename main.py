@@ -365,8 +365,8 @@ if __name__ == "__main__":
     # 目录设置区域（注意配置）
     file_dir = './content/drive/My Drive/'+timedate+'/'
     # pn value there
-    # filedir = './content/drive/My Drive/'+timedate+'/' # all use file_dir
-    pnt = './content/drive/My Drive/pn.txt' # write pn to this path~
+    # filedir = './'+timedate+'/' # all use file_dir
+    pnt = './pn.txt' # write pn to this path~
 
     # 执行区
     isExists=os.path.exists(file_dir)
