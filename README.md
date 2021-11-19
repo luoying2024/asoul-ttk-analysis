@@ -15,3 +15,7 @@
 - 支持“智能”判断，用户只需要使用即可......
 - 合并文件为一个
 - 通过更改文件dir，理论在支持pandas的环境中都能使用
+
+# 具体操作方法请见注释捏
+
+![a](https://tva2.sinaimg.cn/large/87c01ec7gy1fsnqr61rffj21kw0w04jg.jpg)
