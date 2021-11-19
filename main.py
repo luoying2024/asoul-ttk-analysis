@@ -91,6 +91,8 @@ def get_bili_id(bili_url):
     # print(bili_id) # id在这里
     """ 0.视频 1.动态 2.专栏 """
     return bili_id, bili_type  # id, type
+
+
 def get_oid_type(bili_id, bili_type):
     """ 获取url里的type值 """
     if bili_type == 0:  # 视频
@@ -133,12 +135,13 @@ def timestamp_datetime(value):
     dt = time.strftime(format, value)
     return dt
 
+
 def pull(pn,file_dir,target_list):
 
   for i in target_list: 
         bili_id, bili_type = get_bili_id(i)
         b_oid, b_type = get_oid_type(bili_id, bili_type)
-        print('new task--'+b_oid)
+        print('new task--'+str(b_oid))
         oid = b_oid
         gettype = b_type    
         if gettype == 11:
@@ -349,13 +352,13 @@ def second(file_dir):
 
 
 if __name__ == "__main__":
-    # 目标链接配置(最好不要带任何后缀防止出错..)
+    # 目标链接配置
     target_list = [] 
-    target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu/') 
+    target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu')
     #target_list.append('https://www.bilibili.com/read/cv14018730') 
     # 其实好像对哔哩哔哩的所有视频都适用吧...
     targetnow = False # 定义即时分析，自动切换目录
-    githubvesion=1154 # 此参数定义一天之中的提交版本，防止重复分析
+    githubvesion=1102 # 此参数定义一天之中的提交版本，防止重复分析
     
     #---------------------------
     # 时间拼接判定
