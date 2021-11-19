@@ -352,14 +352,8 @@ if __name__ == "__main__":
     # 其实好像对哔哩哔哩的所有视频都适用吧...
     targetnow = False # 定义即时分析，自动切换目录
     githubvesion=1154 # 此参数定义一天之中的提交版本，防止重复分析
-    # 目录设置区域（注意配置）
-    file_dir = './'+timedate+'/'
-    # pn value there
-    # filedir = './'+timedate+'/' # all use file_dir
-    pnt = './pn.txt' # write pn to this path~
-    ## 配置到此结束
     
-    
+    #---------------------------
     # 时间拼接判定
     date01 = datetime.today()
     if targetnow:
@@ -369,8 +363,16 @@ if __name__ == "__main__":
       playnow=''
     if not githubvesion:
       githubvesion=''
-      
+    
     timedate=str(date01.year)+'-'+str(date01.month)+'-'+str(date01.day)+playnow+str(githubvesion)
+    #---------------------------------
+
+    # 目录设置区域（注意配置）
+    file_dir = './'+timedate+'/'
+    # pn value there
+    # filedir = './'+timedate+'/' # all use file_dir
+    pnt = './pn.txt' # write pn to this path~
+    
     # 执行区
     isExists=os.path.exists(file_dir)
     if not isExists:
