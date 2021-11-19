@@ -348,9 +348,7 @@ if __name__ == "__main__":
     # 目标链接配置
     target_list = [] 
     target_list.append('https://www.bilibili.com/read/cv14018730') 
-    target_list.append('https://www.bilibili.com/read/cv14017996') 
-    target_list.append('https://www.bilibili.com/read/cv13698060')
-    targetnow = True
+    targetnow = False
     
     # 时间拼接判定
     date01 = datetime.today()
