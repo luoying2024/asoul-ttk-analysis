@@ -4,19 +4,20 @@
 name: Update TTK
 
 on: 
-  push:
+  watch:
+    types: [started]
 
 jobs:
   deploy:
 
     runs-on: ubuntu-latest
-
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.x
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
