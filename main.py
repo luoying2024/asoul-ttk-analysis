@@ -372,7 +372,7 @@ if __name__ == "__main__":
     # 目标链接配置
     target_list = []
     # target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu')
-    target_list.append('https://www.bilibili.com/read/cv14018730')
+    target_list.append('https://www.bilibili.com/read/cv13696540')
     # 其实好像对哔哩哔哩的所有视频都适用吧...BV号后面务必不要加任何东西，比如/什么的也不行！
     targetnow = False  # 定义即时分析，自动切换目录
     githubvesion = 1102  # 此参数定义一天之中的提交版本，防止重复分析
