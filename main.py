@@ -211,7 +211,7 @@ def pull(pn, file_dir, target_list):
                             tot = tot + 1
                             ####
                             print('处理数' + str(tot) + ' -拉取第' + str(n) + '条评论中的第' + str(m) + '条子评论..')
-                            time.sleep(0.9)
+                            time.sleep(1.1)
                             reply_url = 'https://api.bilibili.com/x/v2/reply/reply?&pn=%s&type=%s&oid=%s&ps=10&root=%s' % (
                             reply_pn, gettype, oid, root)
                             response = requests.get(reply_url, headers=headers)
@@ -372,10 +372,10 @@ if __name__ == "__main__":
     # 目标链接配置
     target_list = []
     # target_list.append('https://www.bilibili.com/video/BV1sy4y187Vu')
-    target_list.append('https://www.bilibili.com/read/cv13696540')
+    target_list.append('https://www.bilibili.com/read/cv14891666')
     # 其实好像对哔哩哔哩的所有视频都适用吧...BV号后面务必不要加任何东西，比如/什么的也不行！
     targetnow = False  # 定义即时分析，自动切换目录
-    githubvesion = 1102  # 此参数定义一天之中的提交版本，防止重复分析
+    githubvesion = 1103  # 此参数定义一天之中的提交版本，防止重复分析
 
     # ---------------------------
     # 时间拼接判定
